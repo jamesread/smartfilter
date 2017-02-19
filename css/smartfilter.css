@@ -1,0 +1,12 @@
+div.smartFilterDescription {
+	background-color: lightgray;
+	padding: 1em;
+}
+
+span.smartFilterKeyword {
+	font-weight: bold;
+}
+
+input.smartFilterInput {
+	width: 100%;
+}

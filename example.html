@@ -1,0 +1,21 @@
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="javascript/smartfilter.js"></script>
+	<link rel = "stylesheet" type = "text/css" href = "css/smartfilter.css" />
+<head>
+<body>
+	<input id = "search" name = "search" onblur = "stateChanged()" onfocus = "stateChanged()" onkeyup = "searchUpdate()"></input>
+
+	<div class = "smartFilterDescription">
+	-
+	</div>
+
+	<script>
+	setupSmartfilter({
+		input: $('#search'),
+		debug: true
+	});
+	</script>
+</body>
+</html>
