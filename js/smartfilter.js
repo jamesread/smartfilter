@@ -1,25 +1,33 @@
-function updateBar(ret) {
-	console.log(ret);
-}
+function SmartFilter(config) {
+	var self = this;
 
-function updateHelp(text) {
-	$('.help').html(text + "<br /><br />" + debugText());
-}
+	this.currentState = "enterValue";
+	this.lastState = null;
 
-function debugText() {
-	return "Current:" + window.currentState + "<br />Last:" + window.lastState + "<br /><br />" +  JSON.stringify(getTokens());
-}
+	this.debug = false
 
-function getSearchText() {
-	return document.getElementById("search").value;
-}
+	if (typeof(config.debug) != "undefined") { 
+		this.debug = config.debug;
+	}
 
-function getLastChar() {
-	return getSearchText().charAt(getSearchText().length - 1)
-}
+	SmartFilter.prototype.updateHelp = function(text) {
+		self.description.html(text + "<br /><br />" + self.debugText());
+	}
 
-function searchUpdate() {
-	stateChanged();
+	SmartFilter.prototype.debugText = function() {
+		return "Current:" + self.currentState + "<br />Last:" + self.lastState + "<br /><br /><pre>" +  JSON.stringify(self.getTokens(), null, 2) + "</pre>"
+	}
+
+	SmartFilter.prototype.getSearchText = function() {
+		return self.input.val();
+	}
+
+	SmartFilter.prototype.getLastChar = function() {
+		return self.getSearchText().charAt(self.getSearchText().length - 1)
+	}
+
+	SmartFilter.prototype.searchUpdate = function() {
+		self.stateChanged();
 
 /**
 	$.getJSON('test.php?listFilters=' + getSearchText(), function(ret) {
@@ -27,135 +35,145 @@ function searchUpdate() {
 		updateBar(ret)	;
 	});
 */
-}
 
-function availableFields() {
-	return ["Name", "Age", "Gender"];
-}
-
-function getSearchKeyword() {
-	txt = getSearchText().match(/\w+$/)
-
-	if (txt == null) {
-		return "";
-	} else {
-		return txt[0];
-	}
-}
-
-function isOperator(c) {
-	if (c == "=" || c == "!") {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-function endsWithJoin() {
-	searchText = getSearchText().toUpperCase();
-
-	if (searchText.endsWith(" AND ")) {
-		return true;
 	}
 
-	return false;
-}
-
-function stateChanged() {
-	if (getSearchText() == "" || (window.lastState == "enterJoin" && endsWithJoin())) {
-		window.currentState = "enterField"
-	} else if (window.lastState == "enterOperator" && getLastChar() == " ") {
-		window.currentState = "enterValue"
-	} else if (window.lastState == "enterField" && getLastChar() == " ") {
-		window.currentState = "enterOperator"
-	} else if (getLastChar() == " " && window.lastState == "enterValue") {
-		window.currentState = "enterJoin"
+	SmartFilter.prototype.availableFields = function() {
+		return ["Name", "Age", "Gender"];
 	}
 
-	if (isOperator(getLastChar())) {
-		window.currentState = "enterOperator"
-	}
+	SmartFilter.prototype.getSearchKeyword = function() {
+		txt = self.getSearchText().match(/\w+$/)
 
-	if (document.activeElement != $('#search')[0]) {
-		window.currentState = "unfocus"
-	} else {
-		window.currentSate = "enterValue"
-	}
-
-	// ---
-
-	updateHelp("-");
-	if (window.currentState == "enterField") {
-		fields = availableFields();
-
-		var txt = "Choose Field: ";
-		keyword = getSearchKeyword();
-		fields = availableFields()
-
-		var numMatches = 0
-
-		for (i = 0; i < fields.length; i++) {
-			item = fields[i];
-
-			if (item.toLowerCase().startsWith(getSearchKeyword().toLowerCase())) {
-				numMatches++;
-				txt += '<span class = "smartFilterKeyword">' + item + '</span> '
-			} else {
-				txt += item + " "
-			}
-		}
-
-		if (keyword != "" && numMatches == 0) {
-			updateHelp('No keywords match: ' + getSearchKeyword());
+		if (txt == null) {
+			return "";
 		} else {
-			updateHelp(txt);
+			return txt[0];
 		}
-	} else if (window.currentState == "enterOperator") {
-		updateHelp("operator: =, !")
-	} else if (window.currentState == "unfocus") {
-		updateHelp("-")
-	} else if (window.currentState == "enterValue") {
-		updateHelp("enter value")
 	}
 
-	window.lastState = window.currentState;
-}
+	SmartFilter.prototype.endsWithJoin = function() {
+		searchText = self.getSearchText().toUpperCase();
 
-function isField(v) {
-	if (availableFields().indexOf(v) == -1) {
+		if (searchText.endsWith(" AND ")) {
+			return true;
+		}
+
 		return false;
-	} else {
-		return true;
 	}
-}
 
-function getTokens() {
-	txtParts = getSearchText().split(" ");
-	tokens = [];
+	SmartFilter.prototype.stateChanged = function(e) {
+		console.log("sc", e);
 
-	txtParts.forEach(function(v, i) {
-		type = "value"
-
-		if (v == "") {
-			return;
-		} else if (isField(v)) {
-			type = "field"
-		} else if (isOperator(v)) {
-			type = "operator"
+		if (self.getSearchText() == "" || (self.lastState == "enterJoin" && self.endsWithJoin())) {
+			self.currentState = "enterField"
+		} else if (self.lastState == "enterOperator" && self.getLastChar() == " ") {
+			self.currentState = "enterValue"
+		} else if (self.lastState == "enterField" && self.getLastChar() == " ") {
+			self.currentState = "enterOperator"
+		} else if (self.getLastChar() == " " && self.lastState == "enterValue") {
+			self.currentState = "enterJoin"
 		}
 
-		tokens.push({
-			"type": type,
-			"value": v
+		if (self.isOperator(self.getLastChar())) {
+			self.currentState = "enterOperator"
+		}
+
+		if (document.activeElement != $('#search')[0]) {
+			self.currentState = "unfocus"
+		} else {
+			self.currentSate = "enterValue"
+		}
+
+		// ---
+
+		self.updateHelp("-");
+		if (self.currentState == "enterField") {
+			fields = self.availableFields();
+
+			var txt = "Choose Field: ";
+			keyword = self.getSearchKeyword();
+			fields = self.availableFields()
+
+			var numMatches = 0
+
+			for (i = 0; i < fields.length; i++) {
+				item = fields[i];
+
+				if (item.toLowerCase().startsWith(self.getSearchKeyword().toLowerCase())) {
+					numMatches++;
+					txt += '<span class = "smartFilterKeyword">' + item + '</span> '
+				} else {
+					txt += item + " "
+				}
+			}
+
+			if (keyword != "" && numMatches == 0) {
+				self.updateHelp('No keywords match: ' + self.getSearchKeyword());
+			} else {
+				self.updateHelp(txt);
+			}
+		} else if (self.currentState == "enterOperator") {
+			self.updateHelp("operator: =, !")
+		} else if (self.currentState == "unfocus") {
+			self.updateHelp("-")
+		} else if (self.currentState == "enterValue") {
+			self.updateHelp("enter value")
+		}
+
+		self.lastState = self.currentState;
+	}
+
+	SmartFilter.prototype.getTokens = function() {
+		txtParts = self.getSearchText().split(" ");
+		tokens = [];
+
+		txtParts.forEach(function(v, i) {
+			type = "value"
+
+			if (v == "") {
+				return;
+			} else if (self.isField(v)) {
+				type = "field"
+			} else if (self.isOperator(v)) {
+				type = "operator"
+			}
+
+			tokens.push({
+				"type": type,
+				"value": v
+			});
 		});
-	});
 
-	return tokens;
+		return tokens;
+	}
+
+	SmartFilter.prototype.isField = function(v) {
+		if (self.availableFields().indexOf(v) == -1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	SmartFilter.prototype.isOperator = function(c) {
+		if (c == "=" || c == "!") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	this.input = $(config.input)
+	this.input.addClass('smartFilterInput')
+	this.input.on('keyup', this.stateChanged);
+	this.input.on('focus', this.stateChanged);
+	this.input.on('blur', this.stateChanged);
+
+	this.lastState = "enterField"
+
+	this.description = $(this.input.siblings('.smartFilterDescription'))
+
+	return this;
 }
 
-function setupSmartfilter(config) {
-	config.input.val("")
-	config.input.addClass("smartFilterInput")
-
-	window.lastState = "enterField"
-}
