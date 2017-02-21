@@ -4,6 +4,8 @@ function SmartFilter(config) {
 	this.currentState = "enterValue";
 	this.lastState = null;
 
+	this.fields = config.fields;
+
 	this.debug = false
 
 	if (typeof(config.debug) != "undefined") { 
@@ -11,11 +13,15 @@ function SmartFilter(config) {
 	}
 
 	SmartFilter.prototype.updateHelp = function(text) {
-		self.description.html(text + "<br /><br />" + self.debugText());
+		self.description.html(text + self.debugText());
 	}
 
 	SmartFilter.prototype.debugText = function() {
-		return "Current:" + self.currentState + "<br />Last:" + self.lastState + "<br /><br /><pre>" +  JSON.stringify(self.getTokens(), null, 2) + "</pre>"
+		if (self.debug) {
+			return "<br /><br />Current:" + self.currentState + "<br />Last:" + self.lastState + "<br /><br /><pre>" +  JSON.stringify(self.getTokens(), null, 2) + "</pre>"
+		} else {
+			return "";
+		}
 	}
 
 	SmartFilter.prototype.getSearchText = function() {
@@ -36,10 +42,6 @@ function SmartFilter(config) {
 	});
 */
 
-	}
-
-	SmartFilter.prototype.availableFields = function() {
-		return ["Name", "Age", "Gender"];
 	}
 
 	SmartFilter.prototype.getSearchKeyword = function() {
@@ -89,11 +91,11 @@ function SmartFilter(config) {
 
 		self.updateHelp("-");
 		if (self.currentState == "enterField") {
-			fields = self.availableFields();
+			fields = self.fields;
 
 			var txt = "Choose Field: ";
 			keyword = self.getSearchKeyword();
-			fields = self.availableFields()
+			fields = self.fields
 
 			var numMatches = 0
 
@@ -119,6 +121,8 @@ function SmartFilter(config) {
 			self.updateHelp("-")
 		} else if (self.currentState == "enterValue") {
 			self.updateHelp("enter value")
+		} else if (self.currentState == "enterJoin") {
+			self.updateHelp("enter join: ...AND...")
 		}
 
 		self.lastState = self.currentState;
@@ -149,7 +153,7 @@ function SmartFilter(config) {
 	}
 
 	SmartFilter.prototype.isField = function(v) {
-		if (self.availableFields().indexOf(v) == -1) {
+		if (self.fields.indexOf(v) == -1) {
 			return false;
 		} else {
 			return true;
