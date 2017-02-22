@@ -1,4 +1,8 @@
-{% include main.css %}
+<style>
+table {
+	width: 100%;
+}
+</style>
 
 # Overview 
 
