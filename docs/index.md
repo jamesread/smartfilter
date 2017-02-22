@@ -7,6 +7,7 @@ into a JSON model that can be sent to a server and processed (eg, search).
 
 ![smart filter screenshot](images/screenshot1.png "smart filter screenshot")
 
+
 # Setup
 	
 Some HTML like this; 
@@ -22,8 +23,25 @@ Then some Javascript;
 	<script type = "text/javascript">
 		sf = new SmartFilter({	
 			input: '#search',
+			fields: ['Name', 'Age', 'Gender'],
 			debug: true
 		});
 	</script>
 
 Obviously you need to include the ``smartfilter.js`` file somewhere on the page too.
+
+
+# Config
+
+| Config field | Description                                                   |
+|--------------|---------------------------------------------------------------|
+| ``input``    | The search field to attach to and setup. Required.            |
+| ``debug``    | Print debug information in the dropdown.
+
+# CSS
+
+| CSS Rule     | Description                                                   |
+|--------------|---------------------------------------------------------------|
+| ``.smartFilterDescription``    | The description box                         |
+
+
