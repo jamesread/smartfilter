@@ -1,3 +1,5 @@
+{% include main.css %}
+
 # Overview 
 
 **SmartFilter** is a jQuery plugin to build powerful key-value search expressions.
