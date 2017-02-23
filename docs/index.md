@@ -16,6 +16,11 @@ into a JSON model that can be sent to a server and processed (eg, search).
 <div id = "smartFilterDescription">-</div>
 </div>
 
+<script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+    integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+	  crossorigin="anonymous"></script>
+
 <script type = "text/javascript" src = "https://cdn.rawgit.com/jamesread/smartfilter/73563f59f5e93e2396c4db9e33d3adbe0a7bb171/js/smartfilter.js"></script>
 
 <script type = "text/javascript">
