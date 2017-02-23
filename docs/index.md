@@ -11,6 +11,12 @@ table {
 It provides auto-complete (for fields, operators and values), and converts text 
 into a JSON model that can be sent to a server and processed (eg, search).
 
+<input id = "smartFilterInput">
+
+</input>
+
+<script tpye = "text/javascript" src = "https://raw.githubusercontent.com/jamesread/smartfilter/master/js/smartfilter.js"></script>
+
 ![smart filter screenshot](images/screenshot1.png "smart filter screenshot")
 
 
