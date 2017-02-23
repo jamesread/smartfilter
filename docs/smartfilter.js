@@ -1,0 +1,1 @@
+../js/smartfilter.js

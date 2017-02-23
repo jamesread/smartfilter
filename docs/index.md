@@ -11,9 +11,9 @@ table {
 It provides auto-complete (for fields, operators and values), and converts text 
 into a JSON model that can be sent to a server and processed (eg, search).
 
-<input id = "smartFilterInput"></input>
+<input id = "smartFilterInput" />
 
-<script tpye = "text/javascript" src = "https://raw.githubusercontent.com/jamesread/smartfilter/master/js/smartfilter.js"></script>
+<script type = "text/javascript" src = "smartfilter.js" />
 <script>new SmartFilter({
 	input: '#smartFilterInput',
 	fields: ['Name', 'Age', 'Gender']
