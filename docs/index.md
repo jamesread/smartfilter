@@ -13,7 +13,7 @@ into a JSON model that can be sent to a server and processed (eg, search).
 
 <input id = "smartFilterInput" />
 
-<script type = "text/javascript" src = "smartfilter.js" />
+<script type = "text/javascript" src = "https://cdn.rawgit.com/jamesread/smartfilter/73563f59f5e93e2396c4db9e33d3adbe0a7bb171/js/smartfilter.js" />
 <script>new SmartFilter({
 	input: '#smartFilterInput',
 	fields: ['Name', 'Age', 'Gender']
