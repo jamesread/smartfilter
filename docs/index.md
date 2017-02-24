@@ -33,7 +33,7 @@ into a JSON model that can be sent to a server and processed (eg, search).
     integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
 	  crossorigin="anonymous"></script>
 
-<script type = "text/javascript" src = "https://cdn.rawgit.com/jamesread/smartfilter/73563f59f5e93e2396c4db9e33d3adbe0a7bb171/js/smartfilter.js"></script>
+<script type = "text/javascript" src = "https://cdn.rawgit.com/jamesread/smartfilter/28e65a9032e97fdb1d9bbb1e32e3e0f622c277de/js/smartfilter.js"></script>
 
 <script type = "text/javascript">
 
