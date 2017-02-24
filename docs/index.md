@@ -15,6 +15,17 @@ div.smartFilterDescription {
 	background-color: lightgray;
 	padding: 1em;
 }
+
+.inputUnfocus {
+	display: none;
+}
+
+.inputFocus {
+	position: absolute;
+	display: block;
+	width: 100%;
+}
+
 </style>
 
 # Overview 
