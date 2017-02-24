@@ -7,6 +7,10 @@ table {
 	width: 100%;
 }
 
+.smartFilterKeyword {
+	font-weight: bold;
+}
+
 div.smartFilterDescription {
 	background-color: lightgray;
 	padding: 1em;
