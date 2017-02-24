@@ -2,6 +2,15 @@
 table {
 	width: 100%;
 }
+
+.smartFilterInput {
+	width: 100%;
+}
+
+div.smartFilterDescription {
+	background-color: lightgray;
+	padding: 1em;
+}
 </style>
 
 # Overview 
@@ -12,8 +21,11 @@ It provides auto-complete (for fields, operators and values), and converts text
 into a JSON model that can be sent to a server and processed (eg, search).
 
 <div>
-<input id = "smartFilterInput" />
-<div id = "smartFilterDescription">-</div>
+
+<p>Try it below!: </p>
+
+<input id = "exampleSearch" />
+<div class = "smartFilterDescription">-</div>
 </div>
 
 <script
@@ -26,7 +38,7 @@ into a JSON model that can be sent to a server and processed (eg, search).
 <script type = "text/javascript">
 
 window.sf = new SmartFilter({
-	input: '#smartFilterInput',
+	input: '#exampleSearch',
 	fields: ['Name', 'Age', 'Gender']
 }); 
 
