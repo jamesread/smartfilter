@@ -17,8 +17,10 @@ function SmartFilter(config) {
 
 		if (text == "-") {
 			self.description.addClass('inputUnfocus')
-		} else {
 			self.description.removeClass('inputFocus')
+		} else {
+			self.description.addClass('inputFocus')
+			self.description.removeClass('inputUnfocus')
 		}
 	}
 
