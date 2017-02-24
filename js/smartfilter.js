@@ -65,7 +65,9 @@ function SmartFilter(config) {
 	}
 
 	SmartFilter.prototype.stateChanged = function(e) {
-		console.log("sc", e);
+		if (self.debug) {
+			console.log("SmartFilter State Change", e);
+		}
 
 		if (self.getSearchText() == "" || (self.lastState == "enterJoin" && self.endsWithJoin())) {
 			self.currentState = "enterField"
@@ -81,7 +83,7 @@ function SmartFilter(config) {
 			self.currentState = "enterOperator"
 		}
 
-		if (document.activeElement != $('#search')[0]) {
+		if (document.activeElement != self.input[0]) {
 			self.currentState = "unfocus"
 		} else {
 			self.currentSate = "enterValue"
