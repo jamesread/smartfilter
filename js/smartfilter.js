@@ -14,6 +14,12 @@ function SmartFilter(config) {
 
 	SmartFilter.prototype.updateHelp = function(text) {
 		self.description.html(text + self.debugText());
+
+		if (text == "-") {
+			self.description.addClass('inputUnfocus')
+		} else {
+			self.description.removeClass('inputFocus')
+		}
 	}
 
 	SmartFilter.prototype.debugText = function() {
@@ -179,6 +185,7 @@ function SmartFilter(config) {
 	this.lastState = "enterField"
 
 	this.description = $(this.input.siblings('.smartFilterDescription'))
+	this.description.addClass('inputUnfocus')
 
 	return this;
 }
