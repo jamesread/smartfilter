@@ -13,14 +13,14 @@ function SmartFilter(config) {
 	}
 
 	SmartFilter.prototype.updateHelp = function(text) {
-		self.description.html(text + self.debugText());
+		self.description.innerHTML = text + self.debugText();
 
 		if (text == "-") {
-			self.description.addClass('inputUnfocus')
-			self.description.removeClass('inputFocus')
+			self.description.classList.add('inputUnfocus')
+			self.description.classList.remove('inputFocus')
 		} else {
-			self.description.addClass('inputFocus')
-			self.description.removeClass('inputUnfocus')
+			self.description.classList.add('inputFocus')
+			self.description.classList.remove('inputUnfocus')
 		}
 	}
 
@@ -33,7 +33,7 @@ function SmartFilter(config) {
 	}
 
 	SmartFilter.prototype.getSearchText = function() {
-		return self.input.val();
+		return self.input.value;
 	}
 
 	SmartFilter.prototype.getLastChar = function() {
@@ -91,7 +91,7 @@ function SmartFilter(config) {
 			self.currentState = "enterOperator"
 		}
 
-		if (document.activeElement != self.input[0]) {
+		if (document.activeElement != self.input) {
 			self.currentState = "unfocus"
 		} else {
 			self.currentSate = "enterValue"
@@ -178,16 +178,20 @@ function SmartFilter(config) {
 		}
 	}
 
-	this.input = $(config.input)
-	this.input.addClass('smartFilterInput')
-	this.input.on('keyup', this.stateChanged);
-	this.input.on('focus', this.stateChanged);
-	this.input.on('blur', this.stateChanged);
+	this.input = document.querySelector(config.input)
+	this.input.classList.add('smartFilterInput')
+	this.input.onkeyup = this.stateChanged;
+	this.input.onfocus = this.stateChanged;
+	this.input.onblur = this.stateChanged;
 
 	this.lastState = "enterField"
 
-	this.description = $(this.input.siblings('.smartFilterDescription'))
-	this.description.addClass('inputUnfocus')
+	this.description = document.createElement("div")
+	this.description.val = "-";
+	this.description.classList.add("smartFilterDescription");
+	this.description.classList.add('inputUnfocus')
+
+	this.input.parentElement.append(this.description);
 
 	return this;
 }
