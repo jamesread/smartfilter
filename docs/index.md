@@ -30,7 +30,7 @@ div.smartFilterDescription {
 
 # Overview 
 
-**SmartFilter** is a jQuery plugin to build powerful key-value search expressions.
+**SmartFilter** is javascript UI powerful logic expressions.
 
 It provides auto-complete (for fields, operators and values), and converts text 
 into a JSON model that can be sent to a server and processed (eg, search).
@@ -42,11 +42,6 @@ into a JSON model that can be sent to a server and processed (eg, search).
 <input id = "exampleSearch" />
 <div class = "smartFilterDescription">-</div>
 </div>
-
-<script
-  src="https://code.jquery.com/jquery-3.1.1.js"
-    integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
-	  crossorigin="anonymous"></script>
 
 <script type = "text/javascript" src = "https://cdn.rawgit.com/jamesread/smartfilter/79d3f4326a5812e7648692fe118942f02926e804/js/smartfilter.js"></script>
 
