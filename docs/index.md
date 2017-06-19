@@ -14,6 +14,7 @@ table {
 div.smartFilterDescription {
 	background-color: lightgray;
 	padding: 1em;
+	z-index: 2;
 }
 
 .inputUnfocus {
