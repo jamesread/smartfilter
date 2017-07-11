@@ -1,0 +1,25 @@
+{
+  "name": "smartfilter",
+  "version": "1.0.0",
+  "description": "A smart filter builder",
+  "main": "js/smartfilter.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesread/smartfilter.git"
+  },
+  "keywords": [
+    "smartfilter"
+  ],
+  "author": "James Read",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/jamesread/smartfilter/issues"
+  },
+  "homepage": "https://github.com/jamesread/smartfilter#readme"
+}
